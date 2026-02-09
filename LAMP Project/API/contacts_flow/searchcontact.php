@@ -1,49 +1,38 @@
 <?php
 
     $inData = getRequestInfo();
-    $searchResults = array();
 
 
     $conn = new mysqli("localhost", "lamp_G19", "WeLoveCOP4331", "ContactManager");
 
     if($conn->connect_error)
     {
-        returnWithError($conn->correct_error, 500);
+        returnWithError($conn->connect_error, 500);
     }
 
     else
     {
-        $stmt = $conn->prepare("SELECT firstname, lastname FROM Contacts WHERE firstname = ? OR lastname = ?");
-        $firstname = $inData["firstname"];
-        $lastname = $inData["lastname"];
-        $stmt->bind_param("ss", $firstname, $lastname);
 
+        $stmt = $conn->prepare("SELECT firstname, lastname, phone FROM Contacts WHERE firstname LIKE ? OR lastname LIKE ? OR phone like ?");
+        $query = "%" . $inData["search"] . "%";
+        $stmt->bind_param("sss", $query, $query, $query);
         $stmt->execute();
 
         $result = $stmt->get_result();
+        $searchResults = array();
 
 
-        if ($result->num_rows > 0) 
-        {
-            while ($row = $result->fetch_assoc())
-            {
-                $data[] = $row;
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()){
+                $searchResults[] = $row;
             }
-
-            sendResultInfo(json_encode($data));
         }
 
-        else
-        {
-            returnWithError("No records found");
-        }
+        sendResultInfoAsJson(json_encode($searchResults));
 
-        $stmt->close();
-        $conn->close();
-
-        
+                $stmt->close();
+                $conn->close();
     }
-
 
 
 
@@ -57,13 +46,6 @@
     {
         header('Content-type: application/json');
         echo $obj;
-    }
-
-    function returnwithInfo($message, $firstName, $lastName, $id, $email)
-    {
-
-        $retValue = '{"firstName": "'. $firstName .'", "lastName": "'. $lastName .'", "email": "'. $email.'"}';
-        sendResultInfoAsJson( $retValue );
     }
 
     function returnWithError($err, $code)
