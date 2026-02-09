@@ -69,9 +69,9 @@
         echo $obj;
     }
 
-    function returnwithInfo($message, $firstName, $lastName, $id, $email){
+    function returnwithInfo($message){
 
-        $retValue = ''.$message.'{"firstName": "'. $firstName .'", "lastName": "'. $lastName .'", "email": "'. $email.'"}';
+        $retValue = '{"'.$message.'"}';
         sendResultInfoAsJson( $retValue );
     }
 
