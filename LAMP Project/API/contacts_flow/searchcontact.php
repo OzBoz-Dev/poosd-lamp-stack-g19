@@ -1,6 +1,7 @@
 <?php
 
     $inData = getRequestInfo();
+    $parent_id = $inData["parent_id"];
 
 
     $conn = new mysqli("localhost", "lamp_G19", "WeLoveCOP4331", "ContactManager");
@@ -12,10 +13,9 @@
 
     else
     {
-
-        $stmt = $conn->prepare("SELECT firstname, lastname, phone FROM Contacts WHERE firstname LIKE ? OR lastname LIKE ? OR phone like ?");
+        $stmt = $conn->prepare("SELECT firstname, lastname, phone FROM Contacts WHERE parent_id = ? AND (firstname LIKE ? OR lastname LIKE ? OR phone like ?)");
         $query = "%" . $inData["search"] . "%";
-        $stmt->bind_param("sss", $query, $query, $query);
+        $stmt->bind_param("isss", $parent_id, $query, $query, $query);
         $stmt->execute();
 
         $result = $stmt->get_result();
