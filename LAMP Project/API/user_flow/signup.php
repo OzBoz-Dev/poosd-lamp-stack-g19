@@ -42,7 +42,7 @@
             $accountCreated = $stmt->execute();
 
             if($accountCreated){
-                returnwithInfo("Account created successfully", $firstName, $lastName, $id, $email);
+                returnwithInfo("Account created successfully");
             }
             else{
                 returnWithError("Account could not be created", 400);
@@ -71,7 +71,7 @@
 
     function returnwithInfo($message, $firstName, $lastName, $id, $email){
 
-        $retValue = '{"firstName": "'. $firstName .'", "lastName": "'. $lastName .'", "email": "'. $email.'"}';
+        $retValue = ''.$message.'{"firstName": "'. $firstName .'", "lastName": "'. $lastName .'", "email": "'. $email.'"}';
         sendResultInfoAsJson( $retValue );
     }
 

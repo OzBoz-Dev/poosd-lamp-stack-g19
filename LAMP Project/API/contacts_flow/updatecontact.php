@@ -43,7 +43,7 @@
 
                 if($check)
                 {
-                    returnWithInfo("Contact updated successfully.", $id, $firstname, $lastname, $email, $phone, $company);
+                    returnWithInfo("Contact updated successfully.");
                 }
                 else
                 {
@@ -89,7 +89,7 @@
     function returnwithInfo($message, $id, $firstName, $lastName, $email, $phone, $company)
     {
 
-        $retValue = '{"id": "'. $id . '", "firstName": "'. $firstName .'", "lastName": "'. $lastName .'", "email": "'. $email.'", "phone": "'. $phone .'", "company": "'. $company .'"}';
+        $retValue = ''.$message.' {"id": "'. $id . '", "firstName": "'. $firstName .'", "lastName": "'. $lastName .'", "email": "'. $email.'", "phone": "'. $phone .'", "company": "'. $company .'"}';
         sendResultInfoAsJson( $retValue );
     }
 
