@@ -15,22 +15,29 @@
 	{
 		$parent_id = $inData["parent_id"];
    		$id = $inData["id"];
-		$stmt = $conn->prepare("SELECT parent_id, firstname, lastname, phone, email, company FROM Contacts where id = ?");
-		$stmt->bind_param("i", $inData["id"]);
+		$stmt = $conn->prepare("SELECT parent_id FROM Contacts where id = ?");
+		$stmt->bind_param("i", $id);
 		$stmt->execute();
 		$result = $stmt->get_result();
-		$info = array();
 
-		if($result)
+        if($row = $result->fetch_assoc())
 		{
-			while($row = $result->fetch_assoc())
-			{
-				$info[] = $row;
+			if ($row['parent_id'] == $parent_id){
+				$stmt = $conn->prepare("SELECT firstname, lastname, phone, email, company FROM Contacts where id = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+		        $result = $stmt->get_result();
+                if($row = $result->fetch_assoc()){
+                    sendResultInfoAsJson(json_encode($row));
+                }
+			}
+			else {
+			    	returnWithError("This parent ID is not allowed to access this contact", 401);
 			}
 		}
-		
-
-		sendResultInfoAsJson(json_encode($info));
+        else {
+            returnWithError("Not a valid contact ID", 404);
+        }
 
 		$stmt->close();
 		$conn->close();
@@ -55,16 +62,5 @@
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 ?>
