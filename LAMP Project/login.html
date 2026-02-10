@@ -1,101 +1,104 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login | Contact Manager</title>
-  <link rel="stylesheet" href="./css/styles.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login | Contact Manager</title>
+    <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <div class="brand">
-        <h1>Contact Manager</h1>
-        <p>Log in to view and manage your contacts.</p>
-      </div>
+    <div class="container">
+        <div class="card">
+            <div class="brand">
+                <h1>Contact Manager</h1>
+                <p>Log in to view and manage your contacts.</p>
+            </div>
 
-      <form id="loginForm">
-        <label for="email">Email</label>
-        <input id="email" type="email" autocomplete="email" required />
+            <form id="loginForm">
+                <label for="email">Email</label>
+                <input id="email" type="email" autocomplete="email" required />
 
-        <label for="password">Password</label>
-        <input id="password" type="password" autocomplete="current-password" required />
+                <label for="password">Password</label>
+                <input id="password" type="password" autocomplete="current-password" required />
 
-        <div id="error" class="error"></div>
+                <div id="error" class="error"></div>
+                <div id="success" class="success"></div>
 
-        <button id="loginBtn" type="submit">Log In</button>
+                <button id="loginBtn" type="submit">Log In</button>
 
-        <div class="helper">
-          Don’t have an account?
-          <a href="./signup.html">Sign up</a>
+                <div class="helper">
+                    Don't have an account?
+                    <a href="./signup.html">Sign up</a>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 
-  <script type="module">
-    const res = await fetch("/API/user_flow/login.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            email: email.value.trim(),
-            password: password.value
-        })
-    });
+    <script type="module">
+        // Get DOM elements FIRST
+        const form = document.getElementById("loginForm");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const errorBox = document.getElementById("error");
+        const successBox = document.getElementById("success");
+        const btn = document.getElementById("loginBtn");
 
-const data = await res.json();
-
-if (!res.ok || !data.id || Number(data.id) === 0) {
-  throw new Error(data?.error || "Login failed.");
-}
-
-
-    const form = document.getElementById("loginForm");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    const errorBox = document.getElementById("error");
-    const btn = document.getElementById("loginBtn");
-
-    function showError(msg) {
-      errorBox.textContent = msg;
-      errorBox.style.display = "block";
-    }
-    function clearError() {
-      errorBox.textContent = "";
-      errorBox.style.display = "none";
-    }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      clearError();
-      btn.disabled = true;
-
-      try {
-        //Our backend endpoint is in: /API/user_flow/login.php
-        const data = await apiRequest("/user_flow/login.php", "POST", {
-          email: email.value.trim(),
-          password: password.value
-        });
-
-        //login.php returns: { id, firstname, lastname, email, error }
-        if (!data || !data.id || Number(data.id) === 0) {
-          throw new Error(data?.error || "Login failed.");
+        // Check if redirected from signup with success
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('signup') === 'success') {
+            successBox.textContent = "Account created successfully!";
+            successBox.style.display = "block";
+            // Clear the URL parameter
+            window.history.replaceState({}, '', './index.html');
         }
 
-        //Save user info for later API calls (contacts are tied to parent_id)
-        localStorage.setItem("userId", String(data.id));
-        localStorage.setItem("userFirstName", data.firstname || "");
-        localStorage.setItem("userLastName", data.lastname || "");
-        // localStorage.setItem("userEmail", data.email || "");
+        function showError(msg) {
+            errorBox.textContent = msg;
+            errorBox.style.display = "block";
+            successBox.style.display = "none";
+        }
+        function clearError() {
+            errorBox.textContent = "";
+            errorBox.style.display = "none";
+        }
 
-        //Send them to the contacts page (change if your main page is different)
-        window.location.href = "./home.html";
-      } catch (err) {
-        showError(err.message || "Login failed.");
-      } finally {
-        btn.disabled = false;
-      }
-    });
-  </script>
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            clearError();
+            btn.disabled = true;
+
+            try {
+                // Our backend endpoint is in: /API/user_flow/login.php
+                const res = await fetch("/API/user_flow/login.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: email.value.trim(),
+                        password: password.value
+                    })
+                });
+
+                const data = await res.json();
+
+                // login.php returns: { id, firstname, lastname, email, error }
+                if (!res.ok || !data.id || Number(data.id) === 0) {
+                    throw new Error(data?.error || "Login failed.");
+                }
+
+                // Save user info for later API calls (contacts are tied to parent_id)
+                localStorage.setItem("userId", String(data.id));
+                localStorage.setItem("userFirstName", data.firstname || "");
+                localStorage.setItem("userLastName", data.lastname || "");
+                localStorage.setItem("userEmail", data.email || "");
+
+                // Send them to the contacts page
+                window.location.href = "./home.html";
+            } catch (err) {
+                showError(err.message || "Login failed.");
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>

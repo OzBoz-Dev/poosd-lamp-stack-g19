@@ -41,7 +41,7 @@
 
         <div class="helper">
           Already have an account?
-          <a href="./login.html">Log in</a>
+          <a href="./index.html">Log in</a>
         </div>
       </form>
     </div>
@@ -92,12 +92,11 @@
         const data = await res.json();
 
         if (!res.ok) {
-          //Expect backend to return { error: "..." } or { message: "..." }
-          throw new Error(data?.error || data?.message || `Signup failed (${res.status})`);
+          throw new Error(data?.error || `Signup failed (${res.status})`);
         }
 
-        //Success: send user to login page
-        window.location.href = "./login.html";
+        // Success: send user to login page with success message
+        window.location.href = "./index.html?signup=success";
       } catch (err) {
         showError(err.message || "Signup failed.");
       } finally {
