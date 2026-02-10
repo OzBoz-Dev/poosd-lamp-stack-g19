@@ -1,0 +1,108 @@
+<!-- Originally, the buttons and search bar looked ugly and took up the whole width of the screen -->
+<!-- I used Claude to remake them as SVG graphics. All SVG configurations done with Claude -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Contacts | Contact Manager</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body class="home-page">
+    <div class="home-container">
+        <!-- Header, Login Info, Login Button-->
+        <header class="header">
+            <div class="header-left">
+                <h1>My Contacts</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-label">Logged in as</span>
+                    <span class="user-name" id="userName">User Name</span>
+                </div>
+                <button class="btn-logout" onclick="logout()">Log Out</button>
+            </div>
+        </header>
+
+        <!-- Search and Add Section -->
+        <div class="controls">
+            <div class="search-box">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM17 17l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <input type="text"
+                       id="searchInput"
+                       class="search-input"
+                       placeholder="Search by name or email..."
+                       oninput="renderContacts()" />
+            </div>
+            <button class="btn-add" onclick="openAddModal()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                Add Contact
+            </button>
+        </div>
+
+        <!-- Contacts Grid -->
+        <div class="contacts-grid" id="contactsGrid">
+            <!-- Contact cards get inserted here dynamically by JavaScript -->
+        </div>
+
+        <!-- Displays if you don't have any contacts -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" opacity="0.2" />
+                <path d="M32 20v24M20 32h24" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <h2>No contacts yet</h2>
+        </div>
+    </div>
+
+    <!-- Add/Edit Contact Modal. AKA Form that comes up when you click Add/Edit Contact -->
+    <div class="modal" id="contactModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Contact</h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <form id="contactForm" onsubmit="saveContact(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" />
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" />
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" />
+                </div>
+                <div id="formError" class="error-message" style="display: none;"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="saveBtn">Save Contact</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="./js/home.js"></script>
+</body>
+</html>

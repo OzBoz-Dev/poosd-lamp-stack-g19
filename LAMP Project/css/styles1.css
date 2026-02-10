@@ -1,0 +1,172 @@
+:root {
+  --bg: #0b1220;
+  --card: #111a2e;
+  --text: #e8eefc;
+  --muted: #a9b5d6;
+  --border: rgba(255,255,255,0.12);
+  --danger: #ff6b6b;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: radial-gradient(900px 600px at 20% 10%, rgba(79,70,229,0.28), transparent 60%),
+              radial-gradient(900px 600px at 80% 20%, rgba(16,185,129,0.18), transparent 60%),
+              var(--bg);
+  color: var(--text);
+}
+
+.container {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(17, 26, 46, 0.86);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.brand h1 {
+  font-size: 20px;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.brand p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 14px 0 6px;
+}
+
+input {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.18);
+  color: var(--text);
+  outline: none;
+}
+
+input:focus {
+  border-color: rgba(99,102,241,0.65);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.22);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 0;
+  background: rgba(99,102,241,0.95);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.helper {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.helper a {
+  color: #c7d2fe;
+  text-decoration: none;
+}
+
+.helper a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,107,107,0.35);
+  background: rgba(255,107,107,0.12);
+  color: #ffd2d2;
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.edit-field {
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.button-row {
+  margin-top: 14px;
+  display:flex;
+  gap: 8px;
+  justify-content: center;
+  width: 400px;
+  height: 50px;
+}
+
+
+
+
+.name-row {
+  display: flex;
+  gap: 10px;
+}
+
+.name-row input {
+  flex: 1;
+}
+
+.contact-info{
+  text-align: center;
+}
+
+.name{
+  margin: 0 0 8px 0;
+}
+
+.contact-header {
+  display: flex;
+  justify-content: center;
+}

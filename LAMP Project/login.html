@@ -86,10 +86,10 @@ if (!res.ok || !data.id || Number(data.id) === 0) {
         localStorage.setItem("userId", String(data.id));
         localStorage.setItem("userFirstName", data.firstname || "");
         localStorage.setItem("userLastName", data.lastname || "");
-        localStorage.setItem("userEmail", data.email || "");
+        // localStorage.setItem("userEmail", data.email || "");
 
         //Send them to the contacts page (change if your main page is different)
-        window.location.href = "./contacts.html";
+        window.location.href = "./home.html";
       } catch (err) {
         showError(err.message || "Login failed.");
       } finally {
