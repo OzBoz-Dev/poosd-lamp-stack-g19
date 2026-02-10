@@ -125,3 +125,48 @@ button:disabled {
   color: #ffd2d2;
   display: none;
 }
+
+.hidden {
+  display: none;
+}
+
+.edit-field {
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.button-row {
+  margin-top: 14px;
+  display:flex;
+  gap: 8px;
+  justify-content: center;
+  width: 400px;
+  height: 50px;
+}
+
+
+
+
+.name-row {
+  display: flex;
+  gap: 10px;
+}
+
+.name-row input {
+  flex: 1;
+}
+
+.contact-info{
+  text-align: center;
+}
+
+.name{
+  margin: 0 0 8px 0;
+}
+
+.contact-header {
+  display: flex;
+  justify-content: center;
+}

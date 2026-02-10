@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Details | Contact Manager</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="contact-header">
+        <div class="contact-info">
+
+          <h1 class="name" id="nameText">Will Sharpe</h1>
+
+          <div id="nameInputs" class="hidden">
+            <input id="firstNameInput" placeholder="First name" />
+            <input id="lastNameInput" placeholder="Last name" />
+          </div>
+
+          <p id="companyText">Google</p>
+          <input id="companyInput" class="edit-field hidden" />
+
+          <p id="emailText">will@example.com</p>
+          <input id="emailInput" class="edit-field hidden" />
+
+          <p id="phoneText">(555) 123-4567</p>
+          <input id="phoneInput" class="edit-field hidden" />
+
+          <div class="button-row">
+            <button id="editBtn">Edit</button>
+            <button id="saveBtn" class="hidden">Save</button>
+            <button id="cancelBtn" class="hidden">Cancel</button>
+            <button id="deleteBtn" class="hidden">Delete Contact</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/details.js"></script>
+</body>
+</html>
