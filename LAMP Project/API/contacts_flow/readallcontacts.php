@@ -9,7 +9,7 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT id, firstname, lastname, phone FROM Contacts WHERE parent_id = ?");
+		$stmt = $conn->prepare("SELECT id, firstname, lastname, phone, email, company FROM Contacts WHERE parent_id = ?");
 		$stmt->bind_param("i", $inData["parent_id"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
@@ -17,11 +17,20 @@
 
 		if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()){
-                $data[] = $row;
+                $data[] = [
+        			"id" => $row["id"],
+        			"firstName" => $row["firstname"],
+        			"lastName" => $row["lastname"],
+        			"email" => $row["email"],
+        			"phone" => $row["phone"],
+        			"company" => $row["company"]
+    			];
             }
         }
 
-        sendResultInfoAsJson(json_encode($data));
+        sendResultInfoAsJson(json_encode([
+			"contacts" => $data
+			]));
 
 		$stmt->close();
 		$conn->close();

@@ -6,7 +6,7 @@ let userFirstName = localStorage.getItem('userFirstName') || '';
 let userLastName = localStorage.getItem('userLastName') || '';
 
 if (!userId) {
-  window.location.href = './index.html';
+  window.location.href = './login.html';
 }
 
 //In home.html there is a thing that will display your username, this is for that
@@ -25,7 +25,7 @@ loadContacts();
 
 async function loadContacts() {
   try {
-    const response = await fetch('/API/user_flow/readcontacts.php', {
+    const response = await fetch('/API/contacts_flow/readallcontacts.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ parent_id: userId })
@@ -47,13 +47,13 @@ async function loadContacts() {
 
 async function addContact(contactData) {
   try {
-    const response = await fetch('/API/user_flow/addcontact.php', {
+    const response = await fetch('/API/contacts_flow/addcontact.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         parent_id: userId,
-        firstName: contactData.firstName,
-        lastName: contactData.lastName,
+        firstname: contactData.firstName,
+        lastname: contactData.lastName,
         email: contactData.email,
         phone: contactData.phone,
         company: contactData.company
@@ -75,14 +75,14 @@ async function addContact(contactData) {
 
 async function updateContact(contactId, contactData) {
   try {
-    const response = await fetch('/API/user_flow/updatecontact.php', {
+    const response = await fetch('/API/contacts_flow/updatecontact.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: contactId,
         parent_id: userId,
-        firstName: contactData.firstName,
-        lastName: contactData.lastName,
+        firstname: contactData.firstName,
+        lastname: contactData.lastName,
         email: contactData.email,
         phone: contactData.phone,
         company: contactData.company
@@ -104,7 +104,7 @@ async function updateContact(contactId, contactData) {
 
 async function deleteContact(contactId) {
   try {
-    const response = await fetch('/API/user_flow/deletecontact.php', {
+    const response = await fetch('/API/contacts_flow/deletecontact.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
