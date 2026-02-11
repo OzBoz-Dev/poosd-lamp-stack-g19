@@ -55,7 +55,7 @@
     }
 
     function returnwithInfo($message){
-        http_response_code(204);
+        http_response_code(200);
         $retValue = '{"message": "'.$message.'"}';
         sendResultInfoAsJson( $retValue );
     }
