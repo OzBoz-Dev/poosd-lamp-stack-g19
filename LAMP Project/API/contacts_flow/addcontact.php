@@ -54,13 +54,13 @@
 
     function returnwithInfo($message, $id){
         http_response_code(201);
-        $retValue = '{"id":' . $id . ',"message":"' . $message . '"}';
+        $retValue = '{"id":' . $id . ',"message" :"' . $message . '"}';
         sendResultInfoAsJson( $retValue );
     }
 
     function returnWithError($err, $code){
         http_response_code($code);
-        $retValue = '{"error: "' . $err . '"}';
+        $retValue = '{"error": "' . $err . '"}';
         sendResultInfoAsJson($retValue);
     }
 

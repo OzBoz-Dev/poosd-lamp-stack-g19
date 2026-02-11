@@ -56,13 +56,13 @@
 
     function returnwithInfo($message){
         http_response_code(204);
-        $retValue = '{"message":' . $message . '}';
+        $retValue = '{"message": "'.$message.'"}';
         sendResultInfoAsJson( $retValue );
     }
 
     function returnWithError($err, $code){
         http_response_code($code);
-        $retValue = '{"error: "' . $err . '"}';
+        $retValue = '{"error": "' . $err . '"}';
         sendResultInfoAsJson($retValue);
     }
 

@@ -51,7 +51,7 @@
 	function returnWithError( $err , $code)
 	{
 		http_response_code($code);
-		$retValue = '{"id":0,"firstname":"","lastname":"", "email":"","error":"' . $err . '"}';
+		$retValue = '{"error": "' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
