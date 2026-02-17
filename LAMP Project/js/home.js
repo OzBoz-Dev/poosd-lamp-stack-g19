@@ -165,7 +165,7 @@ async function searchContact(){
 
     contacts = results.map(r => ({
       id: r.id,
-      firstName: r.firstName ?? "",
+      firstName: r.firstname ?? "",
       lastName : r.lastname ?? "",
       email: r.email ?? "",
       phone: r.phone ?? "",
