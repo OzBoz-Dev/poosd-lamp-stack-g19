@@ -6,9 +6,9 @@
     $lastName = "";
     $email = "";
     $passsword = "";
-   
-
-    $conn = new mysqli("localhost", "lamp_G19", "WeLoveCOP4331", "ContactManager");
+    
+   	require_once("../../../secrets.php");
+	$conn = new mysqli("localhost", DB_USER, DB_PASS, "ContactManager"); 
 
     if ($conn -> connect_error){
         return WithError($conn->connect_error);
