@@ -373,6 +373,18 @@ function logout() {
   window.location.href = './index.html';
 }
 
+function aboutUs(){
+  window.location.href = './about.html';
+  return;
+}
+
+document.getElementById("aboutButton").addEventListener("click", () => {
+  aboutUs().catch(err =>{
+    console.error(err);
+    alert(err.message);
+  })
+})
+
 /*make add contact form go away if you click outside of it, maybe replace with a cancel button later
 document.getElementById('contactModal').addEventListener('click', (e) => {
   if (e.target.id === 'contactModal') {

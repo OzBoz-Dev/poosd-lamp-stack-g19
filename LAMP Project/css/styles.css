@@ -732,3 +732,69 @@ button[type="submit"]:disabled {
   .modal-footer { flex-direction: column-reverse; }
   .btn-secondary, .btn-primary { width: 100%; }
 }
+
+.about-header {
+  text-align: center;
+  padding-top: 40px;
+  font-size: 60px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap:wrap;
+  gap:25px;
+  justify-content: space-around;
+}
+
+.about-card {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem 2rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(180,205,240,0.05);
+  backdrop-filter: blur(20px);
+ 
+
+}
+
+.card-name{
+  padding-bottom: 50px;
+  font-size: 40px;
+}
+
+.card-role {
+  font-size: 30px;
+  text-align: center;
+}
+
+.about-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  background: var(--blue);
+  color: #fff;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  white-space: nowrap;
+  min-height: 44px;
+  width: 120px;
+  margin-left: 20px;
+  position:relative;
+  top:20px;
+  
+}
+    .about-button:hover {
+      background: var(--blue-hover);
+      box-shadow: 0 0 20px var(--blue-glow);
+      transform: translateY(-1px);
+    }
