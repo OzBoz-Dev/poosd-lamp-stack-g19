@@ -789,8 +789,7 @@ button[type="submit"]:disabled {
   min-height: 44px;
   width: 120px;
   margin-left: 20px;
-  position:relative;
-  top:20px;
+  margin-top: 20px;
   
 }
     .about-button:hover {
