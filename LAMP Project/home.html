@@ -1,5 +1,5 @@
-<!-- Originally, the buttons and search bar looked ugly and took up the whole width of the screen -->
-<!-- I used Claude to remake them as SVG graphics. All SVG configurations done with Claude -->
+<!-- I wanted some icons on the buttons so they didn't look so plain -->
+<!-- I used Claude to make them as SVG graphics. All SVG configurations done with Claude -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -65,11 +65,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle">Add Contact</h2>
-                <button class="modal-close" onclick="closeModal()">
+                <!--<button class="modal-close" onclick="closeModal()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
-                </button>
+                </button>-->
             </div>
             <form id="contactForm" onsubmit="saveContact(event)">
                 <div class="form-row">
@@ -97,7 +97,7 @@
                 <div id="formError" class="error-message" style="display: none;"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn-primary" id="saveBtn">Save Contact</button>
+                    <button type="button" class="btn-primary" id="saveBtn" onclick="saveContact(event)">Save Contact</button>
                 </div>
             </form>
         </div>

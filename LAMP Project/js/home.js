@@ -1,4 +1,4 @@
-//Once again all SVG configurations are done with Claude
+//Once again all SVG configurations for the icons on the buttons are done with Claude
 
 //saves login info, if you logged in on your device previously this should access that saved data and auto log you in, else go to login page
 let userId = localStorage.getItem('userId');
@@ -177,7 +177,7 @@ function renderContacts() {
       <div class="contact-card">
         <div class="contact-header">
           <div class="contact-info">
-            <h3 class="contact-name">${fullName}</h3>
+            <h2 class="contact-name">${fullName}</h2>
             ${company}
           </div>
           <div class="contact-actions">
@@ -204,7 +204,7 @@ function renderContacts() {
   }).join('');
 }
 
-//CLAUDE MADE THIS AS A HELPER FOR THE SVG DESIGNS ABOVE
+//CLAUDE MADE THIS AS A HELPER SO THAT THE SVG DESIGNS ABOVE WOULD DISPLAY CORRECTLY ON THE CARD
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
@@ -241,7 +241,7 @@ function closeModal() {
   document.getElementById('contactForm').reset();
 }
 
-//CLAUDE USED TO WRITE THIS FUNCTION
+//CLAUDE USED TO HELP EXPLAIN, WRITE AND DEBUG THIS FUNCTION AND ITS HELPERS
 async function saveContact(event) {
   event.preventDefault();
 
@@ -301,9 +301,9 @@ function logout() {
   window.location.href = './index.html';
 }
 
-//make add contact form go away if you click outside of it, maybe replace with a cancel button later
+/*make add contact form go away if you click outside of it, maybe replace with a cancel button later
 document.getElementById('contactModal').addEventListener('click', (e) => {
   if (e.target.id === 'contactModal') {
     closeModal();
   }
-});
+});*/
