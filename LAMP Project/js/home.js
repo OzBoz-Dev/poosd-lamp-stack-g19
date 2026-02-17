@@ -126,6 +126,78 @@ async function deleteContact(contactId) {
   }
 }
 
+
+async function searchContact(){
+  try{
+    const searchQuery = document.getElementById('searchInput').value.trim();
+    const parentId = localStorage.getItem("userId");
+    if(!searchQuery){
+      await loadContacts();
+      renderContacts();
+      return;
+    }
+    const res = await fetch('/API/contacts_flow/searchcontact.php',{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify ({
+        parent_id : Number(parentId),
+        search: searchQuery
+      })
+
+    });
+
+    const text = await res.text();
+    if(!res.ok){
+      try{
+        const errData = JSON.parse(text);
+        throw new Error(errData.error || `Search falied (${res.status})`);
+      }catch{
+        throw new Error (text || `Seearch failed (${res.status})`);
+      }
+    }
+
+    let results = [];
+    try{
+      results = JSON.parse(text);
+    }catch{
+      throw new Error("Search returned invalid JSON.");
+    }
+
+    contacts = results.map(r => ({
+      id: r.id,
+      firstName: r.firstName ?? "",
+      lastName : r.lastname ?? "",
+      email: r.email ?? "",
+      phone: r.phone ?? "",
+      company: r.company ?? ""
+    }));
+
+    renderContacts();
+  }catch(error){
+    throw new Error("Error searching contacts");
+  }
+}
+
+async function clearSearch(){
+  document.getElementById("searchInput").value = "";
+  await loadContacts();
+  renderContacts();
+}
+
+document.getElementById("searchBtn").addEventListener("click",() => {
+  searchContact().catch(err => {
+    console.error(err);
+    alert(err.message);
+  });
+});
+
+document.getElementById("clearSearchBtn").addEventListener("click", () =>{
+  clearSearch().catch(err => {
+    console.error(err);
+    alert(err.message);
+  });
+});
+
 // =============== UI FUNCTIONS ================
 
 //dynamically display contact cards

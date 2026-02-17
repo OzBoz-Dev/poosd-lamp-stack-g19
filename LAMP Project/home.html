@@ -34,8 +34,14 @@
                        id="searchInput"
                        class="search-input"
                        placeholder="Search by name or email..."
-                       oninput="renderContacts()" />
+                />
             </div>
+            <button class="btn-secondary" id="searchBtn" type="button">
+                Search
+            </button>
+            <button class="btn-secondary" id="clearSearchBtn" type="button">
+                Clear
+            </button>
             <button class="btn-add" onclick="openAddModal()">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
