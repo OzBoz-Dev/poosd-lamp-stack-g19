@@ -598,7 +598,7 @@ button[type="submit"]:disabled {
     position: relative;
     max-width: 500px;
     margin: 3rem auto;
-    background: var(--raised);
+    background: var(--card-bg);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-xl);
     padding: 2rem;
