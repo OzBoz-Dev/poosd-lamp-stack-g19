@@ -772,25 +772,25 @@ button[type="submit"]:disabled {
 }
 
 .about-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.4rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border-light);
-  background: var(--blue);
-  color: #fff;
-  font-family: 'Libre Baskerville', serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
-  white-space: nowrap;
-  min-height: 44px;
-  width: 120px;
-  margin-left: 20px;
-  margin-top: 20px;
-  
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-light);
+    background: var(--blue);
+    color: #fff;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    white-space: nowrap;
+    min-height: 44px;
+    width: 120px;
+    margin-left: 20px;
+    margin-top: 20px;
 }
     .about-button:hover {
       background: var(--blue-hover);
