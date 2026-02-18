@@ -798,3 +798,21 @@ button[type="submit"]:disabled {
       box-shadow: 0 0 20px var(--blue-glow);
       transform: translateY(-1px);
     }
+
+.about-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    padding: 2rem 1.75rem 1.25rem;
+    /*border-bottom: 1px solid var(--border-light);*/
+    z-index: 1;
+}
+
+    .about-header h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3.5rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        color: var(--silver);
+        margin-bottom : 0;
+    }
