@@ -6,8 +6,9 @@
     <title>Login | Contact Manager</title>
     <link rel="stylesheet" href="./css/styles.css" />
 </head>
-<header class="about-button" id="aboutButton" type="button">About Us</header>
 <body>
+    <button class="about-button" id="aboutButton">About Us</button>
+
     <div class="container">
         <div class="card">
             <div class="brand">
@@ -100,10 +101,10 @@
                 btn.disabled = false;
             }
         });
-        function about(){
+        function about() {
             window.location.href = "./about.html";
         }
-        document.getElementById("aboutButton").addEventListener("click",about);
+        document.getElementById("aboutButton").addEventListener("click", about);
     </script>
 </body>
 </html>
