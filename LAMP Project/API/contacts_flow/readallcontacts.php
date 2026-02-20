@@ -10,7 +10,7 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT id, firstname, lastname, phone, email, company FROM Contacts WHERE parent_id = ?");
+		$stmt = $conn->prepare("SELECT id, firstname, lastname, phone, email, company FROM Contacts WHERE parent_id = ? ORDER BY firstname ASC");
 		$stmt->bind_param("i", $inData["parent_id"]);
 		$stmt->execute();
 		$result = $stmt->get_result();

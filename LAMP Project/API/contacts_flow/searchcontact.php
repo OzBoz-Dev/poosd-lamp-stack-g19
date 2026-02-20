@@ -13,7 +13,7 @@
 
     else
     {
-        $stmt = $conn->prepare("SELECT id, firstname, lastname, phone, email, company FROM Contacts WHERE parent_id = ? AND (firstname LIKE ? OR lastname LIKE ? OR email like ?)");
+        $stmt = $conn->prepare("SELECT id, firstname, lastname, phone, email, company FROM Contacts WHERE parent_id = ? AND (firstname LIKE ? OR lastname LIKE ? OR email like ?) ORDER BY firstname ASC");
         $query = "%" . $inData["search"] . "%";
         $stmt->bind_param("isss", $parent_id, $query, $query, $query);
         $stmt->execute();
