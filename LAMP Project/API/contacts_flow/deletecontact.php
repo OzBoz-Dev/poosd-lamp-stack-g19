@@ -1,7 +1,7 @@
 <?php
     $inData = getRequestInfo();
-   
-    $conn = new mysqli("localhost", "lamp_G19", "WeLoveCOP4331", "ContactManager");
+   	require_once("../../../secrets.php");
+	$conn = new mysqli("localhost", DB_USER, DB_PASS, "ContactManager"); 
     $parent_id = -1;
     $id = -1;
 
@@ -55,14 +55,14 @@
     }
 
     function returnwithInfo($message){
-        http_response_code(204);
-        $retValue = '{"message":' . $message . '}';
+        http_response_code(200);
+        $retValue = '{"message": "'.$message.'"}';
         sendResultInfoAsJson( $retValue );
     }
 
     function returnWithError($err, $code){
         http_response_code($code);
-        $retValue = '{"error: "' . $err . '"}';
+        $retValue = '{"error": "' . $err . '"}';
         sendResultInfoAsJson($retValue);
     }
 

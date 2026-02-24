@@ -9,8 +9,8 @@
     $phone = "";
     $company = "";
    
-
-    $conn = new mysqli("localhost", "lamp_G19", "WeLoveCOP4331", "ContactManager");
+	require_once("../../../secrets.php");
+	$conn = new mysqli("localhost", DB_USER, DB_PASS, "ContactManager"); 
 
     if ($conn -> connect_error){
         returnWithError($conn->connect_error);
@@ -54,13 +54,13 @@
 
     function returnwithInfo($message, $id){
         http_response_code(201);
-        $retValue = '{"id":' . $id . ',"message":' . $message . '}';
+        $retValue = '{"id":' . $id . ',"message" :"' . $message . '"}';
         sendResultInfoAsJson( $retValue );
     }
 
     function returnWithError($err, $code){
         http_response_code($code);
-        $retValue = '{"error: "' . $err . '"}';
+        $retValue = '{"error": "' . $err . '"}';
         sendResultInfoAsJson($retValue);
     }
 

@@ -3,8 +3,8 @@
     $inData = getRequestInfo();
     $parent_id = $inData["parent_id"];
 
-
-    $conn = new mysqli("localhost", "lamp_G19", "WeLoveCOP4331", "ContactManager");
+	require_once("../../../secrets.php");
+	$conn = new mysqli("localhost", DB_USER, DB_PASS, "ContactManager"); 
 
     if($conn->connect_error)
     {
@@ -13,7 +13,7 @@
 
     else
     {
-        $stmt = $conn->prepare("SELECT id, firstname, lastname, phone FROM Contacts WHERE parent_id = ? AND (firstname LIKE ? OR lastname LIKE ? OR phone like ?)");
+        $stmt = $conn->prepare("SELECT id, firstname, lastname, phone, email, company FROM Contacts WHERE parent_id = ? AND (firstname LIKE ? OR lastname LIKE ? OR email like ?) ORDER BY firstname ASC");
         $query = "%" . $inData["search"] . "%";
         $stmt->bind_param("isss", $parent_id, $query, $query, $query);
         $stmt->execute();
@@ -51,7 +51,7 @@
     function returnWithError($err, $code)
     {
         http_response_code($code);
-        $retValue = '{"error: "' . $err . '"}';
+        $retValue = '{"error": "' . $err . '"}';
         sendResultInfoAsJson($retValue);
     }
 

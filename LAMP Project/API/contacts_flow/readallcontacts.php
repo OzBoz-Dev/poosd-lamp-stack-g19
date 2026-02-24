@@ -2,14 +2,15 @@
 
 	$inData = getRequestInfo();
 	
-	$conn = new mysqli("localhost", "lamp_G19", "WeLoveCOP4331", "ContactManager"); 	
+	require_once("../../../secrets.php");
+	$conn = new mysqli("localhost", DB_USER, DB_PASS, "ContactManager"); 	
 	if( $conn->connect_error )
 	{
 		returnWithError($conn->connect_error, 500);
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT id, firstname, lastname, phone FROM Contacts WHERE parent_id = ?");
+		$stmt = $conn->prepare("SELECT id, firstname, lastname, phone, email, company FROM Contacts WHERE parent_id = ? ORDER BY firstname ASC");
 		$stmt->bind_param("i", $inData["parent_id"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
@@ -17,11 +18,20 @@
 
 		if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()){
-                $data[] = $row;
+                $data[] = [
+        			"id" => $row["id"],
+        			"firstName" => $row["firstname"],
+        			"lastName" => $row["lastname"],
+        			"email" => $row["email"],
+        			"phone" => $row["phone"],
+        			"company" => $row["company"]
+    			];
             }
         }
 
-        sendResultInfoAsJson(json_encode($data));
+        sendResultInfoAsJson(json_encode([
+			"contacts" => $data
+			]));
 
 		$stmt->close();
 		$conn->close();
@@ -41,7 +51,7 @@
 	function returnWithError( $err , $code)
 	{
 		http_response_code($code);
-		$retValue = '{"error":"' . $err . '"}';
+		$retValue = '{"error": "' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

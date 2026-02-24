@@ -6,7 +6,8 @@
 	$firstName = "";
 	$lastName = "";
 	$email = "";
-	$conn = new mysqli("localhost", "lamp_G19", "WeLoveCOP4331", "ContactManager"); 	
+	require_once("../../../secrets.php");
+	$conn = new mysqli("localhost", DB_USER, DB_PASS, "ContactManager"); 	
 	if( $conn->connect_error )
 	{
 		returnWithError($conn->connect_error, 500);
@@ -51,7 +52,7 @@
 	function returnWithError( $err , $code)
 	{
 		http_response_code($code);
-		$retValue = '{"id":0,"firstname":"","lastname":"", "email":"","error":"' . $err . '"}';
+		$retValue = '{"error": "' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
